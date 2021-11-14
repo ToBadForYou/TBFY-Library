@@ -1,2 +1,3 @@
 tbfy_lib = 1.0.0
 falkos = 1.0.0
+toughlife = 1.0.0
