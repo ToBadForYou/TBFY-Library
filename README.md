@@ -13,3 +13,10 @@ A shared code based, feel free to use the whole or parts of it. However, remembe
 ## Planned features
 - Entity saving/loading system
 - Entity placing/set up tool
+
+## Docs
+Later in the future
+
+## Credits
+- ToBadForYou
+- Bobblehead (ScissorCircle code)
