@@ -16,8 +16,6 @@ function TBFY_LIB:GetClientConfigs(addon)
 end
 
 function TBFY_LIB:SendConfigs(addonID, configs, ply)
-    print(addonID)
-    PrintTable(configs)
     net.Start("tbfy_config_update")
     net.WriteString(addonID)
     net.WriteUInt(#configs, 8)

@@ -11,12 +11,17 @@ A shared code based, feel free to use the whole or parts of it. However, remembe
 - U.I components
 
 ## Planned features
+
 - Entity saving/loading system
 - Entity placing/set up tool
+- DLC integration
 
 ## Docs
+
 Later in the future
 
 ## Credits
+
 - ToBadForYou
-- Bobblehead (ScissorCircle code)
+- Bobblehead (ScissorCircle)
+- Alexander Overvoorde and Matt Stevens (3D2D VGUI Wrapper)

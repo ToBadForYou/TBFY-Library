@@ -57,4 +57,4 @@ function PANEL:Paint(W, H)
 
 	draw.SimpleText(currentText, toggleButtonStyle.font, W/2, H/2, toggleButtonStyle.textColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 end
-vgui.Register("tbfy_button_toggle", PANEL, "DButton")
+vgui.Register("tbfy_toggle_button", PANEL, "DButton")

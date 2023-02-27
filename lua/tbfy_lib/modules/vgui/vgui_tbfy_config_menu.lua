@@ -70,7 +70,7 @@ end
 function PANEL:SetUpConfigs(config)
 	local index = 1
 	for k,v in pairs(config) do
-		local config = vgui.Create("tbfy_config", self.config)
+		local config = vgui.Create("tbfy_addon_config", self.config)
 		config:SetConfig(k, v, index % 2 == 0)
 		self.config.configs[index] = config
 		index = index + 1

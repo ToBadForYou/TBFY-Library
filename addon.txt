@@ -1,8 +1,8 @@
  "AddonInfo"
  {
     "name"                "TBFY Library"
-    "version"             "3.0.0"
-    "up_date"             "2022"
+    "version"             "1.0.0"
+    "up_date"             "2023"
     "author_name"         "ToBadForYou"
     "author_email"        "tobadforyou@outlook.com"
     "author_url"	  "None"

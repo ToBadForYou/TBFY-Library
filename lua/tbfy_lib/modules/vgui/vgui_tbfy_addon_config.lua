@@ -18,7 +18,7 @@ function PANEL:SetConfig(ID, config, nth)
         self.value = config.DefaultValue
     end
     if config.Type == "bool" then
-        self.configElement = vgui.Create("tbfy_button_toggle", self)
+        self.configElement = vgui.Create("tbfy_toggle_button", self)
         self.configElement:SetSliderInfo(12, 0.17)
         self.configElement:SetToggle(self.value)
         self.configWidth = 80
@@ -72,7 +72,7 @@ function PANEL:Paint(w, h)
 	draw.SimpleText("* " .. self.ID, configStyle.fontID, 1, 5, configStyle.textColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 	draw.SimpleText(self.desc, configStyle.fontDesc, 5 + fontW, 5 + fontH, configStyle.textColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 end
-vgui.Register("tbfy_config", PANEL)
+vgui.Register("tbfy_addon_config", PANEL)
 
 /* Component "helpers" to reduce renudant code */
 local PANEL = {}
