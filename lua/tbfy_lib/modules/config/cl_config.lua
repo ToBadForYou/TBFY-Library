@@ -1,6 +1,26 @@
 
-net.Receive("tbfy_config_open", function(ply, len)
+
+
+
+list.Set("DesktopWindows", "TBFY Configs", {
+	title = "TBFY Configs",
+	icon = "tobadforyou/tbfy_lib/settings.png",
+	init = function(icon, window)
+        if TBFY_LIB:HasAdminAccess(LocalPlayer()) then
+		    TBFY_LIB:OpenConfig()
+        end
+	end
+})
+
+function TBFY_LIB:OpenConfig()
+    if IsValid(TBFY_LIB.ConfigMenu) then
+        TBFY_LIB.ConfigMenu:Close()
+    end
     TBFY_LIB.ConfigMenu = vgui.Create("tbfy_config_menu")
+end
+
+net.Receive("tbfy_config_open", function(ply, len)
+    TBFY_LIB:OpenConfig()
 end)
 
 net.Receive("tbfy_config_update", function(ply, len)

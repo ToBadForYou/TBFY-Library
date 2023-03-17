@@ -8,7 +8,7 @@ function TBFY_LIB:Notify(ply, msgtype, len, msg)
   net.Send(ply)
 end
 
-hook.Add("PlayerSay", "tbfy_lib_plysay", function(ply, text)
+hook.Add("PlayerSay", "tbfy_lib_playersay", function(ply, text)
 	if TBFY_LIB:HasAdminAccess(ply) and TBFY_LIB.Config.ConfigChatCommands[text] then
     net.Start("tbfy_config_open")
     net.Send(ply)
@@ -45,6 +45,10 @@ hook.Add("PlayerInitialSpawn", "tbfy_lib_initialspawn", function(ply)
   end
 end)
 
-hook.Add("PostCleanupMap", "tbfy_lib_respawnents", function()
+hook.Add("InitPostEntity", "tbfy_lib_initpostentity", function()
+  TBFY_LIB:SpawnEntities()
+end)
+
+hook.Add("PostCleanupMap", "tbfy_lib_postcleanup", function()
 	TBFY_LIB:SpawnEntities()
 end)

@@ -2,6 +2,10 @@
 local PANEL = {}
 
 function PANEL:Init()
+	self:ShowCloseButton(false)
+	self:SetTitle("")
+	self:MakePopup()
+
 	self.currentAddon = nil
 
 	self.frame = vgui.Create("tbfy_frame", self)
@@ -131,4 +135,4 @@ function PANEL:PerformLayout(w,h)
 	end
 end
 
-vgui.Register("tbfy_config_menu", PANEL)
+vgui.Register("tbfy_config_menu", PANEL, "DFrame")

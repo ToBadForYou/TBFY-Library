@@ -7,7 +7,7 @@ end
 
 net.Receive("tbfy_save_entity", function(len, ply)
     if !TBFY_LIB:HasAdminAccess(ply) then return end
-    
+
     local entClass = net.ReadString()
 
     local data = {}
@@ -53,7 +53,3 @@ function TBFY_LIB:SpawnEntities()
         end
     end
 end
-
-hook.Add("InitPostEntity", "tbfy_lib_init_entities", function()
-    TBFY_LIB:SpawnEntities()
-end)
