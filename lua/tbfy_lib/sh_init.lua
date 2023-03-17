@@ -7,6 +7,9 @@ if SERVER then
 
   file.CreateDir("tbfy_lib")
   file.CreateDir("tbfy_lib/configs")
+  file.CreateDir("tbfy_lib/entities")
+  file.CreateDir("tbfy_lib/entities/" .. string.lower(game.GetMap()))
+  file.CreateDir("tbfy_lib/imgur")
 
 	include("tbfy_lib/sh_config.lua")
 	include("tbfy_lib/sh_addons.lua")

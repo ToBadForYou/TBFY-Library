@@ -12,16 +12,6 @@ net.Receive("tbfy_notify_player", function()
     MsgC(color_red, "[TBFY_LIB] ", color_whitish, txt, "\n")
 end)
 
-net.Receive("tbfy_sendmsg", function()
-	local Type, MsgT = net.ReadString(), net.ReadString()
-	TBFY_LIB:SendMessage(Type, MsgT)
-end)
-
-function TBFY_LIB:SendMessage(Type, MsgT)
-	local Msg = vgui.Create("tbfy_comp_reqdata")
-	Msg:Setup(Type, MsgT, "OK")
-end
-
 //Credits to Bobblehead for creating ScissorCircle function
 //Modified by ToBadForYou
 function TBFY_LIB:SetScissorCirclePercent(x, y, radius, percent, cachedVal)
@@ -38,7 +28,7 @@ function TBFY_LIB:SetScissorCirclePercent(x, y, radius, percent, cachedVal)
 		render.SetStencilZFailOperation(STENCIL_REPLACE)
 
 		draw.NoTexture()
-		surface.SetDrawColor(color_white)
+		surface.SetDrawColor(255, 255, 255, 255)
 
 		local poly = {}
 		if cachedVal then
@@ -81,12 +71,12 @@ function TBFY_LIB:DrawCornerRect(x, y, w, h, length, size)
 	surface.DrawRect(x + w - size, y, size, length)
 
 	//bot left
-  surface.DrawRect(x, y + h - size, length, size)
-  surface.DrawRect(x, y + h - length, size, length)
+	surface.DrawRect(x, y + h - size, length, size)
+	surface.DrawRect(x, y + h - length, size, length)
 
 	//bot right
-  surface.DrawRect(x + w - length, y + h - size, length, size)
-  surface.DrawRect(x + w - size, y + h - length, size, length)
+	surface.DrawRect(x + w - length, y + h - size, length, size)
+	surface.DrawRect(x + w - size, y + h - length, size, length)
 end
 
 function TBFY_LIB:CutLength(str, pW, font)
@@ -117,7 +107,7 @@ end
 function TBFY_LIB:DrawCircularText(text, font, x, y, color, radius)
     local charAmount = #text
     surface.SetFont(font)
-    surface.SetDrawColor(color_white)
+    surface.SetDrawColor(255, 255, 255, 255)
     local totalWidth, height = surface.GetTextSize(text)
     local offsetDegree = (360*totalWidth/(2*math.pi*radius))/2
     for i = 1, charAmount do

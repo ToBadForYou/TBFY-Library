@@ -1,5 +1,3 @@
-file.CreateDir("tbfy_lib/imgur")
-
 TBFY_LIB.CachedImages = TBFY_LIB.CachedImages or {}
 
 local NoPic = Material("vgui/avatar_default")

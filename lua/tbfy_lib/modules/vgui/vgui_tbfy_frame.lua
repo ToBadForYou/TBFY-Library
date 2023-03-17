@@ -28,7 +28,7 @@ function PANEL:Paint(w,h)
 	local fontW, fontH = surface.GetTextSize("A")
 	draw.RoundedBox(4, 0, 0, w, h, mainPanel.color)
 	draw.RoundedBox(4, 0, 0, w, self.headerHeight, mainPanel.headerColor)
-	draw.SimpleText(self.title, mainPanel.font, 5, 5, Color( 255, 255, 255, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+	draw.SimpleText(self.title, mainPanel.font, 5, 5, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 end
 
 function PANEL:PerformLayout(w,h)

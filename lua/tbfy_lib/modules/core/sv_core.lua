@@ -20,7 +20,8 @@ hook.Add("PlayerConnect", "tbfy_lib_check_version", function()
   local gitlink = "https://raw.githubusercontent.com/ToBadForYou/tbfy_lib/master/version.txt"
   http.Fetch(gitlink, function(contents,size)
       for ID, addon in pairs(TBFY_LIB.Addons) do
-        local latestVersion = string.match(string.match(contents, ID .. "%s=%s%d.%d.%d" ), "%d.%d.%d") or 0
+        local foundAddon = string.match(contents, ID .. "%s=%s%d.%d.%d" ) or ""
+        local latestVersion = string.match(foundAddon, "%d.%d.%d") or 0
         if latestVersion == 0 then
           print("[TBFY_LIB] Latest version for " .. addon.Name .. " could not be detected")
         elseif latestVersion == addon.Version then
@@ -34,7 +35,7 @@ hook.Add("PlayerConnect", "tbfy_lib_check_version", function()
     function(message)
       print("[TBFY_LIB] Failed to check for new update for " .. addon.Name .. ": " .. message)
     end)
-  hook.Remove("plyConnect", "falkos_check_version")
+  hook.Remove("plyConnect", "tbfy_lib_check_version")
 end)
 
 hook.Add("PlayerInitialSpawn", "tbfy_lib_initialspawn", function(ply)
@@ -42,4 +43,8 @@ hook.Add("PlayerInitialSpawn", "tbfy_lib_initialspawn", function(ply)
     local clientConfigs = TBFY_LIB:GetClientConfigs(v)
     TBFY_LIB:SendConfigs(k, clientConfigs, ply)
   end
+end)
+
+hook.Add("PostCleanupMap", "tbfy_lib_respawnents", function()
+	TBFY_LIB:SpawnEntities()
 end)

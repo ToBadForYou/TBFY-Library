@@ -4,17 +4,18 @@ A shared code based, feel free to use the whole or parts of it. However, remembe
 
 ## Features
 
-- Language system
+- Addon version checking
+- Entity loading/saving system
+- Imgur fetching/components
 - Ingame config
-- Checks if latest version is used
-- Supports imgur
+- Language system
 - U.I components
 
 ## Planned features
 
-- Entity saving/loading system
-- Entity placing/set up tool
 - DLC integration
+- Entity placing/set up tool
+- Draw equipment on players
 
 ## Docs
 
