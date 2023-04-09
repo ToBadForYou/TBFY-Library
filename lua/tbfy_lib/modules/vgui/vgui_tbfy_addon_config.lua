@@ -1,8 +1,8 @@
 local PANEL = {}
 
 function PANEL:Init()
-	self.ID = ""
-	self.desc = ""
+    self.ID = ""
+    self.desc = ""
     self.configElement = nil
     self.configWidth = 95
 end
@@ -26,18 +26,26 @@ function PANEL:SetConfig(ID, config, nth)
         self.configElement = vgui.Create("DNumSlider", self)
         self.configElement.PerformLayout = function() self.configElement.Label:SetSize(0,0) end
         self.configElement:SetMin(config.Settings.Min)
-		self.configElement:SetMax(config.Settings.Max)
-		self.configElement:SetDecimals(config.Settings.Decimals)
-		self.configElement:SetValue(self.value)
+        self.configElement:SetMax(config.Settings.Max)
+        self.configElement:SetDecimals(config.Settings.Decimals)
+        self.configElement:SetValue(self.value)
         self.configWidth = 125
     elseif config.Type == "jobs" then
-		self.configElement = vgui.Create("tbfy_button", self)
-		self.configElement:SetBText("Setup Jobs")
-		self.configElement.DoClick = function()
-			local configSelection = vgui.Create("tbfy_config_select_multiple")
+        self.configElement = vgui.Create("tbfy_button", self)
+        self.configElement:SetBText("Setup Jobs")
+        self.configElement.DoClick = function()
+            local configSelection = vgui.Create("tbfy_config_select_multiple")
             configSelection:SetUpColumns({TBFY_LIB.Addon.GetLanguage("Job"), TBFY_LIB.Addon.GetLanguage("Allowed")})
-            configSelection:SetUpValues(ID, TBFY_LIB:GetAllJobs(), "Name", self.value, self.configElement)      
-		end
+            configSelection:SetUpValues(ID, TBFY_LIB:GetAllJobs(), "Name", self.value, self.configElement)
+        end
+    elseif config.Type == "weapons" then
+        self.configElement = vgui.Create("tbfy_button", self)
+        self.configElement:SetBText("Setup Weapons")
+        self.configElement.DoClick = function()
+            local configSelection = vgui.Create("tbfy_config_select_multiple")
+            configSelection:SetUpColumns({TBFY_LIB.Addon.GetLanguage("Weapon"), TBFY_LIB.Addon.GetLanguage("Allowed")})
+            configSelection:SetUpValues(ID, TBFY_LIB:GetAllWeapons(), "Name", self.value, self.configElement)
+        end
     elseif config.Type == "job" then
         self.configElement = vgui.Create("tbfy_config_combobox", self)
         self.configElement:SetUpChoices(TBFY_LIB:GetAllJobs(), "Name", false, self.value)
@@ -60,17 +68,17 @@ function PANEL:PerformLayout(w,h)
     end
 end
 
-function PANEL:Paint(w, h) 
+function PANEL:Paint(w, h)
     local configStyle = TBFY_LIB:GetComponentStyle("config")
-	surface.SetFont(configStyle.fontID)
-	local fontW, fontH = surface.GetTextSize("* ")
+    surface.SetFont(configStyle.fontID)
+    local fontW, fontH = surface.GetTextSize("* ")
 
     backgroundColor = self.nth and configStyle.nthColor or configStyle.color
     surface.SetDrawColor(backgroundColor)
     surface.DrawRect(0, 0, w, h)
-    
-	draw.SimpleText("* " .. self.ID, configStyle.fontID, 1, 5, configStyle.textColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
-	draw.SimpleText(self.desc, configStyle.fontDesc, 5 + fontW, 5 + fontH, configStyle.textColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+
+    draw.SimpleText("* " .. self.ID, configStyle.fontID, 1, 5, configStyle.textColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+    draw.SimpleText(self.desc, configStyle.fontDesc, 5 + fontW, 5 + fontH, configStyle.textColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 end
 vgui.Register("tbfy_addon_config", PANEL)
 
@@ -82,10 +90,10 @@ function PANEL:SetUpChoices(choices, nameKey, valueKey, setValue)
         local value = valueKey and v[valueKey] or k
         self:AddChoice(v[nameKey], value, value == setValue)
     end
-    self.OnSelect = function(self, index, value, data)
-        self.selectedItem = data
-        self.adjusted = true
-        self:OnValueChanged(data)
+    self.OnSelect = function(selfPanel, index, value, data)
+        selfPanel.selectedItem = data
+        selfPanel.adjusted = true
+        selfPanel:OnValueChanged(data)
     end
 end
 vgui.Register("tbfy_config_combobox", PANEL, "DComboBox")
@@ -93,16 +101,16 @@ vgui.Register("tbfy_config_combobox", PANEL, "DComboBox")
 local PANEL = {}
 
 function PANEL:Init()
-	self.frame = vgui.Create("tbfy_frame", self)
-	self.frame:SetSize(400, 300)
-	self.frame:SetTitle("")
-	self.frame.child = self
+    self.frame = vgui.Create("tbfy_frame", self)
+    self.frame:SetSize(400, 300)
+    self.frame:SetTitle("")
+    self.frame.child = self
 
     self.valueColumn = 2
     self.allowed = {}
 
     self.listView = vgui.Create("DListView", self)
-	self.listView:SetMultiSelect(false)
+    self.listView:SetMultiSelect(false)
     self.listView.OnRowSelected = function(selfp, index, line)
         local selectedValue = line:GetValue(self.valueColumn)
         local allowed = selectedValue == TBFY_LIB.Addon.GetLanguage("Yes")
@@ -142,12 +150,12 @@ function PANEL:SetUpValues(configID, values, nameKey, setValues, parent)
 end
 
 function PANEL:PerformLayout(w,h)
-	local frameWidth, frameHeight = self.frame:GetWide(), self.frame:GetTall()
-	self:SetSize(self.frame:GetWide(), self.frame:GetTall())
-	self:SetPos(ScrW()/2 - frameWidth/2, ScrH()/2 - frameHeight/2)
-	self.frame:SetPos(0, 0)
+    local frameWidth, frameHeight = self.frame:GetWide(), self.frame:GetTall()
+    self:SetSize(self.frame:GetWide(), self.frame:GetTall())
+    self:SetPos(ScrW() / 2 - frameWidth / 2, ScrH() / 2 - frameHeight / 2)
+    self.frame:SetPos(0, 0)
 
-	self.listView:SetPos(5, self.frame.headerHeight + 5)
-	self.listView:SetSize(w - 10, h - self.frame.headerHeight - 10)
+    self.listView:SetPos(5, self.frame.headerHeight + 5)
+    self.listView:SetSize(w - 10, h - self.frame.headerHeight - 10)
 end
 vgui.Register("tbfy_config_select_multiple", PANEL)

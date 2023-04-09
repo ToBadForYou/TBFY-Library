@@ -10,7 +10,7 @@ function TBFY_LIB:GetClientConfigs(addon)
         local config = addon.Config[v]
         if config.Value != nil then
             clientConfigs[#clientConfigs + 1] = {ID = v, value = config.Value, type = config.Type}
-        end           
+        end
     end
     return clientConfigs
 end
@@ -23,7 +23,7 @@ function TBFY_LIB:SendConfigs(addonID, configs, ply)
         net.WriteString(v.ID)
         TBFY_LIB.DataTypes[v.type].send(v.value)
     end
-    net.Send(ply) 
+    net.Send(ply)
 end
 
 net.Receive("tbfy_config_update", function(len, ply)
@@ -43,14 +43,15 @@ net.Receive("tbfy_config_update", function(len, ply)
         local clientConfigs = TBFY_LIB:GetClientConfigs(addon)
         for k,v in ipairs(player.GetAll()) do
             TBFY_LIB:SendConfigs(addonID, clientConfigs, v)
-        end     
+        end
     end
 end)
 
 net.Receive("tbfy_config_fetch", function(len, ply)
     local SID = TBFY_LIB:SID(ply)
+    local addonID = net.ReadString()
+
     if !TBFY_LIB.CachedConfigs[addonID] or !TBFY_LIB.CachedConfigs[addonID][SID] then
-        local addonID = net.ReadString()
         local addon = TBFY_LIB.Addons[addonID]
 
         local changedConfigs = {}
@@ -68,6 +69,6 @@ net.Receive("tbfy_config_fetch", function(len, ply)
         net.Start("tbfy_config_update")
             net.WriteString(addonID)
             net.WriteUInt(0, 8)
-        net.Send(ply)          
+        net.Send(ply)
     end
 end)

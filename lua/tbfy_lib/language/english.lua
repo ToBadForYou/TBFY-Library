@@ -1,5 +1,6 @@
 TBFY_LIB.Addon.AddLanguage("Yes", "Yes")
 TBFY_LIB.Addon.AddLanguage("No", "No")
+TBFY_LIB.Addon.AddLanguage("Weapon", "Weapon")
 TBFY_LIB.Addon.AddLanguage("Job", "Job")
 TBFY_LIB.Addon.AddLanguage("Allowed", "Allowed")
 

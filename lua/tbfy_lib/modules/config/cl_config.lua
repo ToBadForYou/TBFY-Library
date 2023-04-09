@@ -3,13 +3,13 @@
 
 
 list.Set("DesktopWindows", "TBFY Configs", {
-	title = "TBFY Configs",
-	icon = "tobadforyou/tbfy_lib/settings.png",
-	init = function(icon, window)
+    title = "TBFY Configs",
+    icon = "tobadforyou/tbfy_lib/settings.png",
+    init = function(icon, window)
         if TBFY_LIB:HasAdminAccess(LocalPlayer()) then
-		    TBFY_LIB:OpenConfig()
+            TBFY_LIB:OpenConfig()
         end
-	end
+    end
 })
 
 function TBFY_LIB:OpenConfig()

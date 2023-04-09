@@ -3,6 +3,10 @@ function TBFY_LIB:GetComponentStyle(ID)
 	return TBFY_LIB.style[ID]
 end
 
+function TBFY_LIB:InRenderRange(ply, obj)
+	return ply:GetPos():DistToSqr(obj:GetPos()) < 50000
+end
+
 local color_red, color_whitish = Color(255, 20, 20, 255), Color(200, 200, 200, 255)
 net.Receive("tbfy_notify_player", function()
     local txt = net.ReadString()

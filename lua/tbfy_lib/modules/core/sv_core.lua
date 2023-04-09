@@ -2,9 +2,9 @@ util.AddNetworkString("tbfy_notify_player")
 
 function TBFY_LIB:Notify(ply, msgtype, len, msg)
   net.Start("tbfy_notify_player")
-      net.WriteString(msg)
-      net.WriteFloat(msgtype)
-      net.WriteFloat(len)
+    net.WriteString(msg)
+    net.WriteFloat(msgtype)
+    net.WriteFloat(len)
   net.Send(ply)
 end
 
@@ -18,7 +18,7 @@ end)
 
 hook.Add("PlayerConnect", "tbfy_lib_check_version", function()
   local gitlink = "https://raw.githubusercontent.com/ToBadForYou/tbfy_lib/master/version.txt"
-  http.Fetch(gitlink, function(contents,size)
+  http.Fetch(gitlink, function(contents, size)
       for ID, addon in pairs(TBFY_LIB.Addons) do
         local foundAddon = string.match(contents, ID .. "%s=%s%d.%d.%d" ) or ""
         local latestVersion = string.match(foundAddon, "%d.%d.%d") or 0
@@ -50,5 +50,5 @@ hook.Add("InitPostEntity", "tbfy_lib_initpostentity", function()
 end)
 
 hook.Add("PostCleanupMap", "tbfy_lib_postcleanup", function()
-	TBFY_LIB:SpawnEntities()
+  TBFY_LIB:SpawnEntities()
 end)

@@ -14,7 +14,7 @@ TBFY_LIB.DataTypes = {
         end,
         receive = function()
             return net.ReadUInt(16)
-        end       
+        end
     },
     ["string"] = {
         send = function(value)
@@ -22,7 +22,7 @@ TBFY_LIB.DataTypes = {
         end,
         receive = function()
             return net.ReadString()
-        end          
+        end
     },
     ["table"] = {
         send = function(values)
@@ -38,7 +38,7 @@ TBFY_LIB.DataTypes = {
                 newTable[net.ReadUInt(12)] = true
             end
             return newTable
-        end          
+        end
     }
 }
 TBFY_LIB.DataTypes["options"] = TBFY_LIB.DataTypes["string"]

@@ -1,19 +1,19 @@
 
 function TBFY_LIB:RegisterAddon(ID, name, folder, color, version)
-	if !TBFY_LIB.Addons[ID] then
+    if !TBFY_LIB.Addons[ID] then
         file.CreateDir(folder)
 
-		TBFY_LIB.Addons[ID] = {
+        TBFY_LIB.Addons[ID] = {
             ID = ID,
-			Name = name,
+            Name = name,
             Color = color,
             Version = version,
             Outdated = false,
             Folder = folder,
-			Language = {},
-			Config = {},
+            Language = {},
+            Config = {},
             ClientConfig = {}
-		}
+        }
 
         local addon = TBFY_LIB.Addons[ID]
         addon.AddConfig = function(configID, configType, desc, defaultValue, settings, updateClient)
@@ -22,23 +22,23 @@ function TBFY_LIB:RegisterAddon(ID, name, folder, color, version)
                 addon.ClientConfig[#addon.ClientConfig + 1] = configID
             end
         end
-    
+
         addon.GetConfig = function(configID)
-            return (addon.Config[configID].Value or addon.Config[configID].DefaultValue)
-        end       
+            return addon.Config[configID].Value or addon.Config[configID].DefaultValue
+        end
 
         addon.GetLanguage = function(langID)
             return addon.Language[langID]
         end
-    
+
         addon.AddLanguage = function(langID, languageText)
             addon.Language[langID] = languageText
         end
 
-	else
-		print("[TBFY_LIB] The addon " .. name .. " with ID " .. ID .. " was loaded twice.")
-	end
-	return TBFY_LIB.Addons[ID]
+    else
+        print("[TBFY_LIB] The addon " .. name .. " with ID " .. ID .. " was loaded twice.")
+    end
+    return TBFY_LIB.Addons[ID]
 end
 
 function TBFY_LIB:LoadLanguage(addon, language)
