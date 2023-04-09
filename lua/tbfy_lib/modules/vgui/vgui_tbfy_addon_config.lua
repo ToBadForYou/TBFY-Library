@@ -36,7 +36,7 @@ function PANEL:SetConfig(ID, config, nth)
         self.configElement.DoClick = function()
             local configSelection = vgui.Create("tbfy_config_select_multiple")
             configSelection:SetUpColumns({TBFY_LIB.Addon.GetLanguage("Job"), TBFY_LIB.Addon.GetLanguage("Allowed")})
-            configSelection:SetUpValues(ID, TBFY_LIB:GetAllJobs(), "Name", self.value, self.configElement)
+            configSelection:SetUpValues(ID, TBFY_LIB:GetAllJobs(), "Name", false, self.value, self.configElement)
         end
     elseif config.Type == "weapons" then
         self.configElement = vgui.Create("tbfy_button", self)
@@ -44,7 +44,7 @@ function PANEL:SetConfig(ID, config, nth)
         self.configElement.DoClick = function()
             local configSelection = vgui.Create("tbfy_config_select_multiple")
             configSelection:SetUpColumns({TBFY_LIB.Addon.GetLanguage("Weapon"), TBFY_LIB.Addon.GetLanguage("Allowed")})
-            configSelection:SetUpValues(ID, TBFY_LIB:GetAllWeapons(), "Name", self.value, self.configElement)
+            configSelection:SetUpValues(ID, TBFY_LIB:GetAllWeapons(), "PrintName", "ClassName", self.value, self.configElement)
         end
     elseif config.Type == "job" then
         self.configElement = vgui.Create("tbfy_config_combobox", self)
@@ -101,6 +101,8 @@ vgui.Register("tbfy_config_combobox", PANEL, "DComboBox")
 local PANEL = {}
 
 function PANEL:Init()
+    self:MakePopup()
+
     self.frame = vgui.Create("tbfy_frame", self)
     self.frame:SetSize(400, 300)
     self.frame:SetTitle("")
@@ -138,14 +140,15 @@ function PANEL:OnRemove()
     self.parent.value = self.allowed
 end
 
-function PANEL:SetUpValues(configID, values, nameKey, setValues, parent)
+function PANEL:SetUpValues(configID, values, nameKey, valueKey, setValues, parent)
     self.parent = parent
     self.frame:SetTitle(configID)
     self.allowed = setValues
     for k, v in ipairs(values) do
-        local allowedText = self.allowed[k] and TBFY_LIB.Addon.GetLanguage("Yes") or TBFY_LIB.Addon.GetLanguage("No")
-        local line = self.listView:AddLine(v[nameKey], allowedText)
-        line.key = k
+        local realKey = valueKey and v[valueKey] or k
+        local allowedText = self.allowed[realKey] and TBFY_LIB.Addon.GetLanguage("Yes") or TBFY_LIB.Addon.GetLanguage("No")
+        local line = self.listView:AddLine(v[nameKey] != "" and v[nameKey] or TBFY_LIB.Addon.GetLanguage("Unknown"), allowedText)
+        line.key = realKey
     end
 end
 

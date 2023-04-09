@@ -24,7 +24,7 @@ TBFY_LIB.DataTypes = {
             return net.ReadString()
         end
     },
-    ["table"] = {
+    ["tableInt"] = {
         send = function(values)
             net.WriteUInt(table.Count(values), 8)
             for k,v in pairs(values) do
@@ -39,7 +39,24 @@ TBFY_LIB.DataTypes = {
             end
             return newTable
         end
+    },
+    ["tableString"] = {
+        send = function(values)
+            net.WriteUInt(table.Count(values), 8)
+            for k,v in pairs(values) do
+                net.WriteString(k)
+            end
+        end,
+        receive = function()
+            local amount = net.ReadUInt(8)
+            local newTable = {}
+            for i = 1, amount do
+                newTable[net.ReadString()] = true
+            end
+            return newTable
+        end
     }
 }
 TBFY_LIB.DataTypes["options"] = TBFY_LIB.DataTypes["string"]
-TBFY_LIB.DataTypes["jobs"] = TBFY_LIB.DataTypes["table"]
+TBFY_LIB.DataTypes["jobs"] = TBFY_LIB.DataTypes["tableInt"]
+TBFY_LIB.DataTypes["weapons"] = TBFY_LIB.DataTypes["tableString"]

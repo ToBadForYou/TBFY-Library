@@ -3,7 +3,7 @@ TBFY_LIB.Addon.AddLanguage("No", "No")
 TBFY_LIB.Addon.AddLanguage("Weapon", "Weapon")
 TBFY_LIB.Addon.AddLanguage("Job", "Job")
 TBFY_LIB.Addon.AddLanguage("Allowed", "Allowed")
-
+TBFY_LIB.Addon.AddLanguage("Unknown", "Unknown")
 
 //OLD
 TBFY_LIB.Addon.AddLanguage("TheoryTestMenu", "Theory Test")

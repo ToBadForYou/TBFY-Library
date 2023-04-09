@@ -1,7 +1,4 @@
 
-
-
-
 list.Set("DesktopWindows", "TBFY Configs", {
     title = "TBFY Configs",
     icon = "tobadforyou/tbfy_lib/settings.png",
