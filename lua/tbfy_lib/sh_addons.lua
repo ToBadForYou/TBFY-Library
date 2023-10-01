@@ -35,10 +35,17 @@ function TBFY_LIB:RegisterAddon(ID, name, folder, color, version)
             addon.Language[langID] = languageText
         end
 
-    else
-        print("[TBFY_LIB] The addon " .. name .. " with ID " .. ID .. " was loaded twice.")
-    end
-    return TBFY_LIB.Addons[ID]
+        addon.HasAdminAccess = function(ply)
+            return addon.CheckAdmin and addon.CheckAdmin(ply)
+        end     
+	else
+		print("[TBFY_LIB] The addon " .. name .. " with ID " .. ID .. " was loaded twice.")
+	end
+	return TBFY_LIB.Addons[ID]
+end
+
+function TBFY_LIB:SetAdminAccess(addon, checkAdminFunc)
+    addon.CheckAdmin = checkAdminFunc
 end
 
 function TBFY_LIB:LoadLanguage(addon, language)
