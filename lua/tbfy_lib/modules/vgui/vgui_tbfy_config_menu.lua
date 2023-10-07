@@ -25,7 +25,7 @@ function PANEL:Init()
 	end
 	function sbar.btnGrip:Paint(w, h)
 		draw.RoundedBox(0, 0, 0, w, h, dScrollPanelStyle.barGripColor)
-	end	
+	end
 
 	local index = 1
 	local lastButton
@@ -45,7 +45,7 @@ function PANEL:Init()
 			self.currentAddon = k
 			self:FetchConfigValues(k)
 		end
-		
+
 		self.addons.buttonList[index] = button
 		index = index + 1
 	end
@@ -62,7 +62,7 @@ function PANEL:Init()
 	end
 	function sbar.btnGrip:Paint(w, h)
 		draw.RoundedBox(0, 0, 0, w, h, dScrollPanelStyle.barGripColor)
-	end	
+	end
 end
 
 function PANEL:FetchConfigValues(addonID)
@@ -71,13 +71,11 @@ function PANEL:FetchConfigValues(addonID)
 	net.SendToServer()
 end
 
-function PANEL:SetUpConfigs(config)
-	local index = 1
-	for k,v in pairs(config) do
+function PANEL:SetUpConfigs(configKeys, configs)
+	for index, key in ipairs(configKeys) do
 		local config = vgui.Create("tbfy_addon_config", self.config)
-		config:SetConfig(k, v, index % 2 == 0)
+		config:SetConfig(key, configs[key], index % 2 == 0)
 		self.config.configs[index] = config
-		index = index + 1
 	end
 	self.config:SetVisible(true)
 end

@@ -12,6 +12,7 @@ function TBFY_LIB:RegisterAddon(ID, name, folder, color, version)
             Folder = folder,
             Language = {},
             Config = {},
+            ConfigKeys = {},
             ClientConfig = {}
         }
 
@@ -37,7 +38,7 @@ function TBFY_LIB:RegisterAddon(ID, name, folder, color, version)
 
         addon.HasAdminAccess = function(ply)
             return addon.CheckAdmin and addon.CheckAdmin(ply)
-        end     
+        end
 	else
 		print("[TBFY_LIB] The addon " .. name .. " with ID " .. ID .. " was loaded twice.")
 	end
@@ -46,6 +47,15 @@ end
 
 function TBFY_LIB:SetAdminAccess(addon, checkAdminFunc)
     addon.CheckAdmin = checkAdminFunc
+end
+
+function TBFY_LIB:InitializeConfigKeys(addon)
+    local keys = {}
+    for k,v in pairs(addon.Config) do
+        keys[#keys + 1] = k
+    end
+    table.sort(keys, function(a, b) return a < b end)
+    addon.ConfigKeys = keys
 end
 
 function TBFY_LIB:LoadLanguage(addon, language)

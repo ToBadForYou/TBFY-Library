@@ -31,6 +31,6 @@ net.Receive("tbfy_config_update", function(ply, len)
     end
 
     if IsValid(TBFY_LIB.ConfigMenu) then
-        TBFY_LIB.ConfigMenu:SetUpConfigs(addon.Config)
+        TBFY_LIB.ConfigMenu:SetUpConfigs(addon.ConfigKeys, addon.Config)
     end
 end)
