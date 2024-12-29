@@ -127,3 +127,7 @@ function TBFY_LIB:DrawCircularText(text, font, x, y, color, radius)
         offsetDegree = offsetDegree - (360*charWidth/(2*math.pi*radius))
     end
 end
+
+hook.Add("HUDPaint", "tbfyCoreHUDPaint", function()
+	TBFY_LIB:DrawInteractionHUD()
+end)

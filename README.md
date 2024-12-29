@@ -8,12 +8,12 @@ A shared code based, feel free to use the whole or parts of it. However, remembe
 - Entity loading/saving system
 - Imgur fetching/components
 - Ingame config
+- Interaction system
 - Language system
 - U.I components
 
 ## Planned features
 
-- DLC integration
 - Entity placing/set up tool
 - Draw equipment on players
 

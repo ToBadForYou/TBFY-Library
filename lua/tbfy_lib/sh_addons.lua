@@ -87,6 +87,3 @@ function TBFY_LIB:SaveConfig(addon)
     local configFile = addon.Folder .. "/config.txt"
     file.Write(configFile, util.TableToJSON(config))
 end
-
-TBFY_LIB.Addon = TBFY_LIB.Addon or TBFY_LIB:RegisterAddon("tbfy_lib", "TBFY Library", "tbfy_lib", color_white, "1.0.0")
-TBFY_LIB:LoadLanguage(TBFY_LIB.Addon, TBFY_LIB.Config.Language)
