@@ -1,10 +1,10 @@
 
-util.AddNetworkString("tbfyInitInteraction")
+util.AddNetworkString("tbfy_interaction")
 
 local activeActions = {}
 local function toggleAction(ply, actionTime, actionTable, actionString)
 	activeActions[TBFY_LIB:SID(ply)] = actionTable
-	net.Start("tbfyInitInteraction")
+	net.Start("tbfy_interaction")
 		net.WriteUInt(actionTime, 7)
 		if actionString then
 			net.WriteString(actionString)
@@ -42,7 +42,7 @@ hook.Add("KeyPress", "tbfyInteractionKeyPress", function(ply, key)
 			local Tr = util.TraceLine(Trace);
 			local traceEnt = Tr.Entity
 
-			if IsValid(traceEnt) and withinInteractionRange(ply, traceEnt) then
+			if IsValid(traceEnt) and traceEnt.tbfyInteractable and withinInteractionRange(ply, traceEnt) then
 				TBFY_LIB:StartAction(ply, traceEnt, Tr.HitPos)
 			end
 		end

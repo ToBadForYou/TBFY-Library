@@ -16,6 +16,7 @@ function PANEL:Init()
 	self.DrawText = true
 	self.DrawBox = true
 	self.AdjustTextColor = false
+	self.Multiline = false
 end
 
 function PANEL:UpdateColours()
@@ -24,6 +25,10 @@ function PANEL:UpdateColours()
 
 	self.BColor = self.DButtonC
 	return
+end
+
+function PANEL:SetMultiline(enable)
+	self.Multiline = enable
 end
 
 function PANEL:SetBText(Text)
@@ -66,13 +71,12 @@ function PANEL:SetCIcon()
 	self.CIcon = true
 end
 
-function PANEL:Paint(W,H)
+function PANEL:Paint(W, H)
 	local TWPos, THPos = W/2, H/2
 	local IWPos, IHPos, ISize = W/2, 0, {W,H}
+	surface.SetFont(self.Font)
+	local TW, TH = surface.GetTextSize("A")
 	if self.CIcon then
-		local F = self.Font
-		surface.SetFont(F)
-		local TW, TH = surface.GetTextSize(self.ButtonText)
 		THPos = H-TH
 		local CSize = W*0.66
 		IWPos, IHPos = W/2, H*0.1
@@ -86,7 +90,13 @@ function PANEL:Paint(W,H)
 		if self.AdjustTextColor then
 			TextColor = self.BColor
 		end
-		draw.SimpleText(self.ButtonText, self.Font, TWPos, THPos, TextColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		if self.Multiline then
+			for k, lineText in ipairs(self.ButtonText) do
+				draw.SimpleText(lineText, "default", TWPos, TH/4 + TH * (k-1), TextColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+			end	
+		else
+			draw.SimpleText(self.ButtonText, self.Font, TWPos, THPos, TextColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		end
 	end
 	if self.Picture then
 		local PicPad = self.PicPadding

@@ -1,5 +1,5 @@
 
-net.Receive("tbfyInitInteraction", function()
+net.Receive("tbfy_interaction", function()
     local actionTime, actionText = net.ReadUInt(7), net.ReadString()
 
     if actionTime == 0 then

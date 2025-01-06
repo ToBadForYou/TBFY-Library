@@ -10,9 +10,9 @@ end
 
 hook.Add("PlayerSay", "tbfy_lib_playersay", function(ply, text)
     if TBFY_LIB:HasAdminAccess(ply) and TBFY_LIB.Config.ConfigChatCommands[text] then
-    net.Start("tbfy_config_open")
-    net.Send(ply)
-    return ""
+        net.Start("tbfy_config_open")
+        net.Send(ply)
+        return ""
     end
 end)
 
@@ -23,17 +23,17 @@ hook.Add("PlayerConnect", "tbfy_lib_check_version", function()
             local foundAddon = string.match(contents, ID .. "%s=%s%d.%d.%d" ) or ""
             local latestVersion = string.match(foundAddon, "%d.%d.%d") or 0
             if latestVersion == 0 then
-            print("[TBFY_LIB] Latest version for " .. addon.Name .. " could not be detected")
+                print("[TBFY_LIB] Latest version for " .. addon.Name .. " could not be detected")
             elseif latestVersion == addon.Version then
-            print("[TBFY_LIB] " .. addon.Name .. " up to date: v" .. addon.Version)
+                print("[TBFY_LIB] " .. addon.Name .. " up to date: v" .. addon.Version)
             else
-            print("[TBFY_LIB] " .. addon.Name .. " outdated: v" .. latestVersion .. " available, current version in use: v" .. addon.Version)
-            addon.Outdated = true
+                print("[TBFY_LIB] " .. addon.Name .. " outdated: v" .. latestVersion .. " available, current version in use: v" .. addon.Version)
+                addon.Outdated = true
             end
         end
         end,
         function(message)
-        print("[TBFY_LIB] Failed to check for new update for " .. addon.Name .. ": " .. message)
+            print("[TBFY_LIB] Failed to check for new update for " .. addon.Name .. ": " .. message)
         end)
     hook.Remove("plyConnect", "tbfy_lib_check_version")
 end)

@@ -83,21 +83,19 @@ function TBFY_LIB:DrawCornerRect(x, y, w, h, length, size)
 	surface.DrawRect(x + w - size, y + h - length, size, length)
 end
 
-function TBFY_LIB:CutLength(str, pW, font)
+function TBFY_LIB:CutTextLength(text, widthAvailable, font)
 	surface.SetFont(font);
 
-	local sW = pW - 40;
+	local sWithAvailable = widthAvailable - 40;
+	for i = 1, string.len(text) do
+		local splitText = string.sub(text, 1, i);
+		local w, h = surface.GetTextSize(splitText);
 
-	for i = 1, string.len(str) do
-		local sStr = string.sub(str, 1, i);
-		local w, h = surface.GetTextSize(sStr);
+		if (w > widthAvailable || (w > sWithAvailable && string.sub(text, i, i) == " ")) then
+			local cutText = TBFY_LIB:CutTextLength(string.sub(text, i + 1), widthAvailable, font);
 
-		if (w > pW || (w > sW && string.sub(str, i, i) == " ")) then
-			local cutRet = TBFY_LIB:CutLength(string.sub(str, i + 1), pW, font);
-
-			local returnTable = {sStr};
-
-			for k, v in pairs(cutRet) do
+			local returnTable = {splitText};
+			for k, v in ipairs(cutText) do
 				table.insert(returnTable, v);
 			end
 
@@ -105,7 +103,7 @@ function TBFY_LIB:CutLength(str, pW, font)
 		end
 	end
 
-	return {str};
+	return {text};
 end
 
 function TBFY_LIB:DrawCircularText(text, font, x, y, color, radius)

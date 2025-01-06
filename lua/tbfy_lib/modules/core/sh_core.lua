@@ -23,3 +23,7 @@ end
 function TBFY_LIB:GetAllWeapons()
 	return weapons.GetList()
 end
+
+function TBFY_LIB:WithinInteractionRange(ent1, ent2)
+	return ent1:GetPos():DistToSqr(ent2:GetPos()) < TBFY_LIB:GetConfig("INTERACTION_Range")^2
+end

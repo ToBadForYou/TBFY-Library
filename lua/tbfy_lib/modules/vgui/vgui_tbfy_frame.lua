@@ -22,7 +22,7 @@ function PANEL:SetTitle(title)
     self.title = title
 end
 
-function PANEL:Paint(w,h)
+function PANEL:Paint(w, h)
 	local mainPanel = TBFY_LIB:GetComponentStyle("mainPanel")
 	surface.SetFont(mainPanel.font)
 	local fontW, fontH = surface.GetTextSize("A")
@@ -31,7 +31,7 @@ function PANEL:Paint(w,h)
 	draw.SimpleText(self.title, mainPanel.font, 5, 5, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 end
 
-function PANEL:PerformLayout(w,h)
+function PANEL:PerformLayout(w, h)
 	self:SetPos(ScrW()/2 - w/2, ScrH()/2 - h/2)
 
 	self.closeButton:SetPos(w - 25, 3)

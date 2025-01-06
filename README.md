@@ -14,8 +14,9 @@ A shared code based, feel free to use the whole or parts of it. However, remembe
 
 ## Planned features
 
-- Entity placing/set up tool
 - Draw equipment on players
+- Entity placing/set up tool
+- Error overview UI (for config/set up errors)
 
 ## Docs
 
